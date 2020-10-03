@@ -5,12 +5,12 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.scenarioOutline({
-  "name": "Verify success status and assert response for RatesAPI",
+  "name": "Verify response for future date should be current date",
   "description": "",
   "keyword": "Scenario Outline",
   "tags": [
     {
-      "name": "@FifthTest"
+      "name": "@SixthTest"
     }
   ]
 });
@@ -19,7 +19,7 @@ formatter.step({
   "keyword": "Given "
 });
 formatter.step({
-  "name": "user calls \"\u003cMethod\u003e\" http request with \"\u003cResource\u003e\"",
+  "name": "user calls \"\u003cMethod\u003e\" http request with \"\u003cFuture date\u003e\"",
   "keyword": "When "
 });
 formatter.step({
@@ -27,7 +27,7 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.step({
-  "name": "\"\u003cKey\u003e\" in response is \"\u003cResource\u003e\"",
+  "name": "Verify current \"\u003cKey\u003e\" Recived in Response for future date exchange",
   "keyword": "And "
 });
 formatter.examples({
@@ -38,28 +38,28 @@ formatter.examples({
     {
       "cells": [
         "Method",
-        "Resource",
         "Code",
-        "Key"
+        "Key",
+        "Future date"
       ]
     },
     {
       "cells": [
         "Get",
-        "2020-09-18",
         "200",
-        "date"
+        "date",
+        "2020-10-20"
       ]
     }
   ]
 });
 formatter.scenario({
-  "name": "Verify success status and assert response for RatesAPI",
+  "name": "Verify response for future date should be current date",
   "description": "",
   "keyword": "Scenario Outline",
   "tags": [
     {
-      "name": "@FifthTest"
+      "name": "@SixthTest"
     }
   ]
 });
@@ -74,7 +74,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "user calls \"Get\" http request with \"2020-09-18\"",
+  "name": "user calls \"Get\" http request with \"2020-10-20\"",
   "keyword": "When "
 });
 formatter.match({
@@ -94,11 +94,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "\"date\" in response is \"2020-09-18\"",
+  "name": "Verify current \"date\" Recived in Response for future date exchange",
   "keyword": "And "
 });
 formatter.match({
-  "location": "StepDefinition.in_response_is(String,String)"
+  "location": "StepDefinition.Recived_in_Response_for_future_date(String)"
 });
 formatter.result({
   "status": "passed"

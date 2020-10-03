@@ -17,7 +17,7 @@ Scenario Outline: Verify success status and assert response for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
 Then the API call got status code <Code>
-And "<Key>" in response is "<Value>"
+And Verify "<Key>" in response is "<Value>"
  Examples:
  
  |Method  | Resource | Code | Key | Value |
@@ -52,7 +52,7 @@ Scenario Outline: Verify success status and assert response for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
 Then the API call got status code <Code>
-And "<Key>" in response is "<Resource>"
+And Verify "<Key>" in response is "<Resource>"
  Examples:
  
  |Method  | Resource     | Code | Key | 
@@ -63,11 +63,11 @@ Scenario Outline: Verify response for future date should be current date
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Future date>"    
 Then the API call got status code <Code>
-And "<Key>" in response is "<Resource>"
+And Verify current "<Key>" Recived in Response for future date exchange
  Examples:
  
- |Method  | Resource     | Code | Key | Future date |
- |Get     | 2020-10-02   | 200  | date| 2020-10-20  |
+ |Method  | Code | Key | Future date |
+ |Get     | 200  | date| 2020-10-20  |
  
  # Before execution , we need to modify data according to scenario because these data are date dependent
  

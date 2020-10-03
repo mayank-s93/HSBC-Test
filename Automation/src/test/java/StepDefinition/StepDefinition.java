@@ -28,6 +28,8 @@ public class StepDefinition extends Utils {
 
 	RequestSpecification req_Spec;
 	Response response;
+	String resp;
+	JsonPath js;
 	
 	public ExpectedException exception= ExpectedException.none();
 	
@@ -63,18 +65,23 @@ public class StepDefinition extends Utils {
 	}
 
 
-	@And("{string} in response is {string}")
+	@And("Verify {string} in response is {string}")
 	public void in_response_is(String key, String Expectedvalue) {
 		
 		//Approach 1------------------------------------------------------------------------Working as expected
 		
-		  String resp=response.asString(); // to get response in String
-		  JsonPath js=new JsonPath(resp);
-		  
+		   resp=response.asString(); // to get response in String
+		   js=new JsonPath(resp);
+		   
+		   if(key.equalsIgnoreCase("date") && Expectedvalue.equalsIgnoreCase("latest")) {
+			   
+			   assertEquals(js.getString(key),getDate()); 
+			   System.out.println("For "+key+" Value in response is"+js.getString(key));
+		   }
+		   else {
 		 assertEquals(js.getString(key),Expectedvalue);                                // Validating values provided by scenario with the response
 		 System.out.println("For "+key+" Value is "+js.getString(key));
-		 
-		
+		   }
 		
 		
 		
@@ -107,8 +114,14 @@ public class StepDefinition extends Utils {
 		
 	}
 	
-	
-	
+	@And("Verify current {string} Recived in Response for future date exchange")
+	public void Recived_in_Response_for_future_date(String key) {
+		resp=response.asString(); 
+		   js=new JsonPath(resp);
+		   assertEquals(js.getString(key),getDate()); 
+		   System.out.println("For Future date  rates we recived date -"+js.getString(key)+", which is current date");
+		
+	}
 	
 	
 
