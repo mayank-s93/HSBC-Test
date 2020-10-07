@@ -54,9 +54,9 @@ public class StepDefinition extends Utils {
 	public void validateStatusCode(Integer code) {
 		
 		if(code==200)
-		    response.then().log().all().assertThat().statusCode(code).body("base", equalTo("EUR")); //Verifying status code and base value when request is successful because then only base currency will display  
+		    response.then().assertThat().statusCode(code).body("base", equalTo("EUR")); //Verifying status code and base value when request is successful because then only base currency will display  
 		else 
-			response.then().log().all().assertThat().statusCode(code);	
+			response.then().assertThat().statusCode(code);	
 		
 	
 		System.out.println("Content Type in header is : "+response.getHeader("Content-Type"));
@@ -68,7 +68,6 @@ public class StepDefinition extends Utils {
 	@And("Verify {string} in response is {string}")
 	public void in_response_is(String key, String Expectedvalue) {
 		
-		//Approach 1------------------------------------------------------------------------Working as expected
 		
 		   resp=response.asString(); // to get response in String
 		   js=new JsonPath(resp);
@@ -76,53 +75,25 @@ public class StepDefinition extends Utils {
 		   if(key.equalsIgnoreCase("date") && Expectedvalue.equalsIgnoreCase("latest")) {
 			   
 			   assertEquals(js.getString(key),getDate()); 
-			   System.out.println("For "+key+" Value in response is"+js.getString(key));
+			   System.out.println("For "+key+" Value in response is "+js.getString(key));
 		   }
-		   else {
+     else {
 		 assertEquals(js.getString(key),Expectedvalue);                                // Validating values provided by scenario with the response
 		 System.out.println("For "+key+" Value is "+js.getString(key));
 		   }
 		
 		
-		
-		//Approch 2 with Pojo class----------------Main POJO class working is fine but Issue with nested pojo class. rate value showing null
-		
-		/*
-		System.out.println("control is here");
-		 GetRates resp = response.getBody().as(GetRates.class);
-		
-		
-		if(key.equalsIgnoreCase("date")) {                           // Able to get value from pojo class for date
-			assertEquals(resp.getDate(), Expectedvalue);
-			System.out.println("Date is : "+resp.getDate());
-			
-		}
-		else if(key.equalsIgnoreCase("ILS")) {                      // For nested Pojo , it is returning Null value
-			
-			assertEquals(resp.getRates().getILS(), Expectedvalue);
-			System.out.println("ILS Value against EUR is : "+resp.getRates().getILS());
-			
-		}
-		else if(key.equalsIgnoreCase("base")) {                       // Able to get value from pojo class for base
-			assertEquals(resp.getBase(), Expectedvalue);
-			System.out.println("Base Currency  is : "+resp.getBase());
-			
-		}
-		
-		
-		*/
-		
 	}
 	
 	@And("Verify current {string} Recived in Response for future date exchange")
 	public void Recived_in_Response_for_future_date(String key) {
-		resp=response.asString(); 
+		
+		   resp=response.asString(); 
 		   js=new JsonPath(resp);
 		   assertEquals(js.getString(key),getDate()); 
-		   System.out.println("For Future date  rates we recived date -"+js.getString(key)+", which is current date");
+		   System.out.println("For Future date  rates we recived date - "+js.getString(key)+", which is current date");
 		
 	}
-	
 	
 
 }

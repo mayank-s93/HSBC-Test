@@ -1,6 +1,6 @@
  Feature: Validate Rates API
 
-@FirstTest
+@FirstTest @test
 Scenario Outline: Verify success status for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
@@ -12,7 +12,7 @@ Then the API call got status code <Code>
  
  
  
- @SecondTest
+ @SecondTest @test
 Scenario Outline: Verify success status and assert response for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
@@ -20,11 +20,11 @@ Then the API call got status code <Code>
 And Verify "<Key>" in response is "<Value>"
  Examples:
  
- |Method  | Resource | Code | Key | Value |
- |Get     | latest   | 200  | rates.GBP | 0.90673|
+ |Method  | Resource | Code | Key  | Value  |
+ |Get     | latest   | 200  | date | latest |
  
  
-  @ThirdTest
+  @ThirdTest  @test
 Scenario Outline: Verify Error code for incorrect URI for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
@@ -35,7 +35,7 @@ Then the API call got status code <Code>
  |Method  | Resource | Code | 
  |Get     |          | 400  | 
  
-  @FourthTest
+  @FourthTest @test
 Scenario Outline: Verify success status for given date
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
@@ -47,7 +47,7 @@ Then the API call got status code <Code>
  
  
  
- @FifthTest
+ @FifthTest @test
 Scenario Outline: Verify success status and assert response for RatesAPI
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Resource>"
@@ -58,7 +58,7 @@ And Verify "<Key>" in response is "<Resource>"
  |Method  | Resource     | Code | Key | 
  |Get     | 2020-09-18   | 200  | date| 
  
-  @SixthTest
+  @SixthTest @test
 Scenario Outline: Verify response for future date should be current date
 Given Rates API "Base_URL" for Latest Foreign Exchange rates
 When user calls "<Method>" http request with "<Future date>"    

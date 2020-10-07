@@ -12,7 +12,8 @@ import io.cucumber.junit.CucumberOptions;
 		plugin= {"pretty", "html:target/htmlreports"},
 		features="src/test/java/Features/RatesAPIValidation.feature",
 		glue= {"StepDefinition"},
-		tags= {"@SixthTest"}
+		tags= {"@test"}
+		
 		
 		)
 public class Runner {
